@@ -32,6 +32,7 @@ export default{
         await axios.post('http://127.0.0.1:8000/api/login',this.data)
         .then((response)=>{this.data= response})
         .catch((error)=>{console.log(error)});
+        this.$router.push('/home')
     }
    }
 }
