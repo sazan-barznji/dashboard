@@ -10,31 +10,31 @@
             <p></p>
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" required v-model="data.name" :class="{ 'is-invalid': isValid && $v.data.name.$error }">
-                <div v-if="isValid && !$v.data.name.required" class="invalid-feedback">Name is required</div>
+                <input type="text" class="form-control" id="name" required v-model="user.name" :class="{ 'is-invalid': isValid && $v.user.name.$error }">
+                <div v-if="isValid && !$v.user.name.required" class="invalid-feedback">Name is required</div>
             </div>
             <div class="mb-3">
                 <label for="Email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="Email" v-model="data.email" required :class="{ 'is-invalid': isValid && $v.data.email.$error }">
-                <div v-if="isValid && $v.data.email.$error" class="invalid-feedback">
-                    <span v-if="!$v.data.email.required">Email is required</span>
-                    <span v-if="!$v.data.email.email">Email is not valid</span>
+                <input type="email" class="form-control" id="Email" v-model="user.email" required :class="{ 'is-invalid': isValid && $v.user.email.$error }">
+                <div v-if="isValid && $v.user.email.$error" class="invalid-feedback">
+                    <span v-if="!$v.user.email.required">Email is required</span>
+                    <span v-if="!$v.user.email.email">Email is not valid</span>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" required v-model="data.password" :class="{ 'is-invalid': isValid && $v.data.password.$error }">
-                <div v-if="isValid && $v.data.password.$error" class="invalid-feedback">
-                    <span v-if="!$v.data.password.required">Password field is required</span>
-                    <span v-if="!$v.data.password.minLength">Maxium 8 characters allowed</span>
+                <input type="password" class="form-control" id="password" required v-model="user.password" :class="{ 'is-invalid': isValid && $v.user.password.$error }">
+                <div v-if="isValid && $v.user.password.$error" class="invalid-feedback">
+                    <span v-if="!$v.user.password.required">Password field is required</span>
+                    <span v-if="!$v.user.password.minLength">Maxium 8 characters allowed</span>
                 </div>
             </div>
             <div class="mb-3">
                 <label for="c_password" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="c_password" required v-model="data.c_password" :class="{ 'is-invalid': isValid && $v.data.c_password.$error }" />
-                <div v-if="isValid && $v.data.c_password.$error" class="invalid-feedback">
-                    <span v-if="!$v.data.c_password.required">Confirm Password field is required</span>
-                    <span v-else-if="!$v.data.c_password.sameAsPassword">Passwords should be matched</span>
+                <input type="password" class="form-control" id="c_password" required v-model="user.c_password" :class="{ 'is-invalid': isValid && $v.user.c_password.$error }" />
+                <div v-if="isValid && $v.user.c_password.$error" class="invalid-feedback">
+                    <span v-if="!$v.user.c_password.required">Confirm Password field is required</span>
+                    <span v-else-if="!$v.user.c_password.sameAsPassword">Passwords should be matched</span>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
@@ -49,7 +49,7 @@ export default {
     name: 'RegisterForm',
     data() {
         return {
-            data: {
+            user: {
                 name: null,
                 email: null,
                 password: null,
@@ -59,7 +59,7 @@ export default {
         }
     },
     validations: {
-                data: {
+                user: {
                     name: {
                         required
                     },
@@ -86,7 +86,7 @@ export default {
                 if (this.$v.$invalid) {
                     return;
                 }
-            await axios.post('register', this.data)
+            await axios.post('register', this.user)
                 .then((res) => {  console.log(res)})
                 .catch((error) => {
                     console.log(error)

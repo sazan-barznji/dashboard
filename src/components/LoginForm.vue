@@ -8,11 +8,11 @@
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" v-model="data.email">
+                <input type="email" class="form-control" id="email" v-model="user.email">
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" v-model="data.password">
+                <input type="password" class="form-control" id="password" v-model="user.password">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -26,7 +26,7 @@ export default{
     name:'LoginForm',
     data(){
         return{
-            data:{
+            user:{
                 email:null,
                 password:null
             }
@@ -34,11 +34,14 @@ export default{
     },
    methods:{
     async login(){
-        await axios.post('login',this.data)
-        .then((response)=>{console.log(response)})
-        .catch((error)=>{console.log(error)});
-        
-        console.log("success");
+       const response= await axios.post('login',this.user);
+        // .then((res)=>{console.log(res)})
+        // .catch((error)=>{console.log(error)});
+        console.log(response);
+        localStorage.setItem('token', response.data.token);
+        console.log("success"); 
+
+        this.$store.dispatch('user',response.data.user);
         this.$router.push('/')
     }
    }
