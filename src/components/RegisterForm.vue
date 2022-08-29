@@ -86,8 +86,8 @@ export default {
                 if (this.$v.$invalid) {
                     return;
                 }
-            await axios.post('http://127.0.0.1:8000/api/register', this.data)
-                .then((res) => { this.data = res })
+            await axios.post('register', this.data)
+                .then((res) => {  console.log(res)})
                 .catch((error) => {
                     console.log(error)
                 });
