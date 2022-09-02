@@ -38,6 +38,7 @@ export default{
         // .then((res)=>{console.log(res)})
         // .catch((error)=>{console.log(error)});
         console.log(response);
+
         localStorage.setItem('token', response.data.token);
         console.log("success"); 
 

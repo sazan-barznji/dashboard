@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>Home Page </h1>
-    <h2 v-if="user"> Hi, {{  user.name  }} </h2>
+    <h2 v-if="user"> Hi, {{  user[1].name  }} </h2>
     <h2 v-if="!user"> we dont know your name</h2>
 
     <table class="table">
@@ -14,7 +14,7 @@
       </thead> 
       <tbody>
         <tr v-for="u in user" :key="u.id">
-          <th scope="row">1</th>
+          <th scope="row">{{u.id}}</th>
           <td>{{  u.name  }}</td>
           <td>{{  u.email  }}</td>
         </tr>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+// import { mapGetters } from 'vuex';
 import axios from 'axios';
 export default {
   name: 'HomeView',
@@ -35,17 +35,22 @@ export default {
   },
   data() {
     return {
-      user: {}
+      user: null
     }
   },
   async created() {
-    const response = await axios.get('user');
-    this.$store.dispatch('user', response.data)
+    const response = await axios.get('user')
+    .then((response) =>{ this.user= response.data})
+    .catch((error)=>console.log(error));
+
+    console.log(response);
+
+    // this.$store.dispatch('user', response.data)
 
   },
-  computed: {
-    ...mapGetters(['user'])
-  }
+  // computed: {
+  //   // ...mapGetters(['user'])
+  // }
 
 }
 </script>
