@@ -20,30 +20,24 @@
 
 </template>
 <script>
-import axios from 'axios';
-
+import { mapActions } from 'vuex';
 export default{
     name:'LoginForm',
     data(){
         return{
             user:{
-                email:null,
-                password:null
+                email:"",
+                password:""
             }
         }
     },
    methods:{
-    async login(){
-       const response= await axios.post('login',this.user);
-        // .then((res)=>{console.log(res)})
-        // .catch((error)=>{console.log(error)});
-        console.log(response);
-
-        localStorage.setItem('token', response.data.token);
-        console.log("success"); 
-
-        this.$store.dispatch('user',response.data.user);
-        this.$router.push('/')
+    ...mapActions({
+        signin: 'auth/signin'
+    }),
+    login(){
+        this.signin(this.user);
+        this.$router.push('/DashBoard')
     }
    }
 }

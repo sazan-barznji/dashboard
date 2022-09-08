@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import RegisterForm from '../components/RegisterForm.vue'
 import LoginForm from '../components/LoginForm.vue'
+import DashBoard from '../components/DashBoard.vue'
 
 Vue.use(VueRouter)
 
@@ -27,8 +28,12 @@ const routes = [
     name: 'LoginForm',
     component: LoginForm
   },
+  {
+    path: '/DashBoard',
+    name: 'DashBoard',
+    component: DashBoard
+  },
 ]
-
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
