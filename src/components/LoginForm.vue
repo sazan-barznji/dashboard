@@ -37,7 +37,7 @@ export default{
     }),
     login(){
         this.signin(this.user);
-        this.$router.push('/DashBoard')
+        this.$router.push({name:'DashBoard'})
     }
    }
 }

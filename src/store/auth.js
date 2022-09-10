@@ -27,7 +27,7 @@ export default {
         }
 
     },
-    //first create action
+//first create action
     actions: {
         async signin({ dispatch }, credentials) {
             let response = await axios.post('login', credentials)
@@ -38,14 +38,11 @@ export default {
         async attempt({ commit }, token) {
             commit('SET_TOKEN', token)
             try {
-                let response = await axios.get('user', {
-                    headers:{
-                        'Authorization': 'Bearer '+token
-                    }
-                })
+                let response = await axios.get('user')
                 commit('SET_USER', response.data.data)
             } catch (e) {
-                console.log("fail")
+                commit('SET_TOKEN', null)
+                commit('SET_USER', null)
             }
         }
     }
