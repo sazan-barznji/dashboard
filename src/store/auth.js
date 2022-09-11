@@ -54,10 +54,10 @@ export default {
         }, 
         logout({commit}){
             //return a promise 
-            return axios.post('logout').then(()=>{
                 commit('SET_TOKEN', null)
                 commit('SET_USER', null)
-            })
+                // localStorage.removeItem('token')
+           
         }
     }
 }
