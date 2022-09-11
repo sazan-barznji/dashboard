@@ -36,7 +36,14 @@ export default {
             dispatch('attempt', response.data.data.token);
         },
         async attempt({ commit }, token) {
-            commit('SET_TOKEN', token)
+            //no sending request unless we have a token
+            if (token){
+                commit('SET_TOKEN', token)
+            }
+            //no request will be send to api
+            // if (!state.token){
+            //     return
+            // }
             try {
                 let response = await axios.get('user')
                 commit('SET_USER', response.data.data)
@@ -44,6 +51,13 @@ export default {
                 commit('SET_TOKEN', null)
                 commit('SET_USER', null)
             }
+        }, 
+        logout({commit}){
+            //return a promise 
+            return axios.post('logout').then(()=>{
+                commit('SET_TOKEN', null)
+                commit('SET_USER', null)
+            })
         }
     }
 }

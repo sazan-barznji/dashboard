@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import RegisterForm from '../components/RegisterForm.vue'
 import LoginForm from '../components/LoginForm.vue'
 import DashBoard from '../components/DashBoard.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -31,7 +32,16 @@ const routes = [
   {
     path: '/DashBoard',
     name: 'DashBoard',
-    component: DashBoard
+    component: DashBoard,
+    beforeEnter: (to, from, next)=>{
+      if(!store.getters['auth/authenticated']){
+        return next ({
+        name: LoginForm
+        })
+      }
+      
+      next()
+    }
   },
 ]
 const router = new VueRouter({

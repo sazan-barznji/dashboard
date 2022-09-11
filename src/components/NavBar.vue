@@ -17,7 +17,7 @@
                     </li>
                     <li class="nav-item" v-if="authenticated">
                         <!-- <router-link class="nav-link" :to="{name: 'about'}">Signout </router-link> -->
-                        <a class="nav-link"  href="/">logout </a>
+                        <a class="nav-link" @click.prevent="logout" href="/">logout </a>
                     </li>
                     <li class="nav-item" v-else >
                         <router-link class="nav-link" :to="{name: 'LoginForm'}">Login </router-link>
@@ -28,7 +28,7 @@
     </nav>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 export default
 {
     name: 'NavBar',
@@ -36,7 +36,20 @@ export default
         ...mapGetters({
             authenticated: 'auth/authenticated',
             user: 'auth/user',
-        })
+        }), 
     },  
+    methods: {
+     ...mapActions({
+        logoutAction: 'auth/logout'
+     }),
+     logout(){
+        this.logoutAction().then(()=>{
+            console.log('logout! ')
+            this.$router.replace({
+                name: 'HomeView'
+            })
+        })
+     }
+    }
 }
 </script>

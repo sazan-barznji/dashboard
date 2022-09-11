@@ -8,6 +8,8 @@ import './components/axios'
 Vue.config.productionTip = false
 Vue.use(Vuelidate)
 
+// to ensure re-authentication after refresh 
+store.dispatch('auth/attempt', localStorage.getItem('token'))
 new Vue({
   router,
   store,
