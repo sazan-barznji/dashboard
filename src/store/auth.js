@@ -1,9 +1,6 @@
 import axios from "axios"
-
 export default {
-
     namespaced: true,
-
     state: {
         token: null,
         user: null
@@ -36,12 +33,12 @@ export default {
             dispatch('attempt', response.data.data.token);
         },
         async attempt({ commit }, token) {
-            //no sending request unless we have a token
+            //no sending request unless having token
             if (token){
                 commit('SET_TOKEN', token)
             }
             //no request will be send to api
-            // if (!state.token){
+            // if (!this.state.token){
             //     return
             // }
             try {
