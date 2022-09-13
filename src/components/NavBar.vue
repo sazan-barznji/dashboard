@@ -19,40 +19,50 @@
                     </li>
                     <li class="nav-item" v-if="authenticated">
                         <!-- <router-link class="nav-link" :to="{name: 'about'}">Signout </router-link> -->
-                        <a class="nav-link" @click.prevent="logout" href="/">logout </a>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                User
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <li><a class="nav-link" @click.prevent="logout" href="/">logout </a></li>
+                            </ul>
+                        </div>
+
                     </li>
-                    <li class="nav-item" v-else >
+                    <li class="nav-item" v-else>
                         <router-link class="nav-link" :to="{name: 'LoginForm'}">Login </router-link>
                     </li>
                 </ul>
             </div>
-            
+
         </div>
     </nav>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default
-{
-    name: 'NavBar',
-    computed:{
-        ...mapGetters({
-            authenticated: 'auth/authenticated',
-            user: 'auth/user',
-        }), 
-    },  
-    methods: {
-     ...mapActions({
-        logoutAction: 'auth/logout'
-     }),
-     logout(){
-        this.logoutAction().then(()=>{
-            console.log('logout! ')
-            this.$router.replace({
-                name: 'HomeView'
-            })
-        })
-     }
+    {
+        name: 'NavBar',
+        computed: {
+            ...mapGetters({
+                authenticated: 'auth/authenticated',
+                user: 'auth/user',
+            }),
+        },
+        methods: {
+            ...mapActions({
+                logoutAction: 'auth/logout'
+            }),
+            logout() {
+                this.logoutAction().then(() => {
+                    console.log('logout! ')
+                    this.$router.replace({
+                        name: 'HomeView'
+                    })
+                })
+            }
+        }
     }
-}
 </script>
