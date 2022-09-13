@@ -18,14 +18,15 @@
                         <router-link class="nav-link" :to="{name: 'about'}">About </router-link>
                     </li>
                     <li class="nav-item" v-if="authenticated">
-                        <!-- <router-link class="nav-link" :to="{name: 'about'}">Signout </router-link> -->
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 User
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Setting</a></li>
+                                <li>
+                                    <router-link class="nav-link" :to="{name:'UserProfile'}"> Setting</router-link>
+                                </li>
                                 <li><a class="nav-link" @click.prevent="logout" href="/">logout </a></li>
                             </ul>
                         </div>

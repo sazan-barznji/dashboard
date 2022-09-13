@@ -5,7 +5,7 @@ import RegisterForm from '../components/RegisterForm.vue'
 import LoginForm from '../components/LoginForm.vue'
 import DashBoard from '../components/DashBoard.vue'
 import store from '@/store'
-
+import UserProfile from '../components/UserProfile.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -43,6 +43,11 @@ const routes = [
       next()
     }
   },
+  {
+    path: '/profile',
+    name: 'UserProfile',
+    component: UserProfile
+  }
 ]
 const router = new VueRouter({
   mode: 'history',
