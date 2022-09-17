@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <NavBar/>
+    <!-- <router-link class="nav-link" :to="{name: 'LoginForm'}">Login </router-link> -->
     <router-view/>
   </div>
 </template>

@@ -1,54 +1,53 @@
 <template>
-    <div class="register container">
-        <div class="row">
-            <div class="col">
+    <div class="register container-fluid">
+        <form @submit.prevent="createUsers" method="post">
+            <h1>Register</h1>
+            <div>
+                <h5>Register for New Account</h5>
+                <p>thank you for connecting with us, sign up to manage your account</p>
+            </div>
+            <p></p>
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" required v-model="user.name"
+                    :class="{ 'is-invalid': isValid && $v.user.name.$error }">
+                <div v-if="isValid && !$v.user.name.required" class="invalid-feedback">Name is required</div>
+            </div>
+            <div class="mb-3">
+                <label for="Email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="Email" v-model="user.email" required
+                    :class="{ 'is-invalid': isValid && $v.user.email.$error }">
+                <div v-if="isValid && $v.user.email.$error" class="invalid-feedback">
+                    <span v-if="!$v.user.email.required">Email is required</span>
+                    <span v-if="!$v.user.email.email">Email is not valid</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" required v-model="user.password"
+                    :class="{ 'is-invalid': isValid && $v.user.password.$error }">
+                <div v-if="isValid && $v.user.password.$error" class="invalid-feedback">
+                    <span v-if="!$v.user.password.required">Password field is required</span>
+                    <span v-if="!$v.user.password.minLength">Maxium 8 characters allowed</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="c_password" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="c_password" required v-model="user.c_password"
+                    :class="{ 'is-invalid': isValid && $v.user.c_password.$error }" />
+                <div v-if="isValid && $v.user.c_password.$error" class="invalid-feedback">
+                    <span v-if="!$v.user.c_password.required">Confirm Password field is required</span>
+                    <span v-else-if="!$v.user.c_password.sameAsPassword">Passwords should be matched</span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+            <br/><br/>
+            <p>Already Have an Account? <router-link :to="{name:'LoginForm'}"> Register</router-link></p>
+          
+        </form>
 
-            </div>
-            <div class="col">
-                <form @submit.prevent="createUsers" method="post">
-                    <h1>Register</h1>
-                    <div>
-                        <h5>Register for New Account</h5>
-                        <p>thank you for connecting with us, sign up to manage your account</p>
-                    </div>
-                    <p></p>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" required v-model="user.name"
-                            :class="{ 'is-invalid': isValid && $v.user.name.$error }">
-                        <div v-if="isValid && !$v.user.name.required" class="invalid-feedback">Name is required</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="Email" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="Email" v-model="user.email" required
-                            :class="{ 'is-invalid': isValid && $v.user.email.$error }">
-                        <div v-if="isValid && $v.user.email.$error" class="invalid-feedback">
-                            <span v-if="!$v.user.email.required">Email is required</span>
-                            <span v-if="!$v.user.email.email">Email is not valid</span>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" required v-model="user.password"
-                            :class="{ 'is-invalid': isValid && $v.user.password.$error }">
-                        <div v-if="isValid && $v.user.password.$error" class="invalid-feedback">
-                            <span v-if="!$v.user.password.required">Password field is required</span>
-                            <span v-if="!$v.user.password.minLength">Maxium 8 characters allowed</span>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="c_password" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="c_password" required v-model="user.c_password"
-                            :class="{ 'is-invalid': isValid && $v.user.c_password.$error }" />
-                        <div v-if="isValid && $v.user.c_password.$error" class="invalid-feedback">
-                            <span v-if="!$v.user.c_password.required">Confirm Password field is required</span>
-                            <span v-else-if="!$v.user.c_password.sameAsPassword">Passwords should be matched</span>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
-                </form>
-            </div>
-        </div>
+
+
 
 
 
@@ -108,3 +107,11 @@ export default {
     }
 }
 </script>
+<style>
+.register {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 2em;
+}
+</style>

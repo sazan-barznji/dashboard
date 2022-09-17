@@ -19,16 +19,18 @@
                         <input type="password" class="form-control" id="password" v-model="user.password">
                     </div>
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary" :disabled="!user.email && user.password">Submit</button>
                     </div>
-
+                    <p>Don't Have an Account? <router-link :to="{name:'RegisterForm'}"> Register</router-link>
+                    </p>
                 </form>
             </div>
 
-            <div class="col img">
+            <div class="col  img">
             </div>
 
         </div>
+
 
     </div>
 
@@ -71,16 +73,19 @@ export default {
     height: 100vh;
 }
 
-form {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+.form {
+    display: flex;
+    justify-content: center;
 }
 
-.form {
-    position: relative !important;
-    margin: 0;
+form {
+    margin: auto;
+}
 
+
+@media only screen and (max-width: 800px) {
+    .img {
+        display: none;
+    }
 }
 </style>
