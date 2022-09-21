@@ -4,8 +4,9 @@ import HomeView from '../views/HomeView.vue'
 import RegisterForm from '../components/RegisterForm.vue'
 import LoginForm from '../components/LoginForm.vue'
 import DashBoard from '../components/DashBoard.vue'
-// import store from '@/store'
+import store from '@/store'
 import UserProfile from '../components/UserProfile.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -36,7 +37,7 @@ const routes = [
     component: LoginForm
   },
   {
-    path: '/DashBoard',
+    path: '/dashboard',
     name: 'DashBoard',
     component: DashBoard,
     // beforeEnter: (to, from, next)=>{
@@ -62,35 +63,16 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach(async (to, from) => {
-//     console.log(to.name)
-//   console.log(from)
-//   if ( to.name == 'LoginForm') {
-//     return { name: 'about' }
-//   }
-// })
-router.beforeEach(async(to, from) => {
-  console.log(to.name)
-  console.log(from)
-  if (to.name == 'HomeView') {
-    router.push({ name: 'about' })
+console.log(store)
+
+router.beforeEach((to, from, next) => {
+  console.log(!store.getters.authenticated)
+  if (to.path == '/dashboard' && !store.getters.authenticated) {
+    
+    next({ path: '/login' })
+  } else {
+    next()
   }
 })
-
-// router.beforeEach((to, from, next) => {
-//   if (!store.getters['auth/authenticated']){
-//      next({ name: 'LoginForm' })
-//   }
-//   else next()
-// })
-// router.beforeEach((to,from,next)=>{
-//    if(!store.getters['auth/authenticated']){
-//         return next ({
-//         name: 'LoginForm'
-//         })
-//       }
-
-//       next()
-// })
 
 export default router
